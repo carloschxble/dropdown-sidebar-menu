@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 :root {
     --blue-ideen: #011e41;
     --green-ideen: #18be58;
-    --border-radius: 1.6rem;
+    --border-radius: 2rem;
     --border-radius-button: 1.2rem;
     --box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 }
@@ -15,7 +16,7 @@
 }
 
 html {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 62.5%;
 }
 
@@ -45,6 +46,55 @@ ul, li {
 
 
 
+/* Specific designs */
+.button--active > a {
+    background-color: var(--green-ideen) !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.button--active > a svg {
+    display: none;
+}
+
+.button--active > a .fa-bounce {
+    display: block !important;
+    color: #fff !important;
+    font-size: 1.6rem;
+}
+
+.button--sidebar a {
+    display: grid;
+    place-content: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: var(--border-radius-button);
+}
+
+.button--sidebar a svg {
+    font-size: 2rem;
+}
+
+.button--sidebar a .fa-bounce {
+    display: none;
+}
+
+.button--sidebar a:hover svg {
+    display: none;
+}
+
+.button--sidebar a:hover .fa-bounce {
+    display: block;
+}
+
+.container--shadow {
+    border-radius: var(--border-radius);
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    z-index: 100;
+}
+
+
+
 /* Code lines */
 .primary-container {
     position: relative;
@@ -61,9 +111,6 @@ ul, li {
     grid-template-rows: 8rem calc(100% - 16rem) 8rem;
     width: 8rem;
     height: calc(100vh - 4rem);
-    border-radius: var(--border-radius);
-    background-color: #fff;
-    box-shadow: var(--box-shadow);
 }
 
 .primary-container .sidebar .sidebar__logo {
@@ -82,35 +129,100 @@ ul, li {
     height: inherit;
 }
 
+.primary-container .sidebar .sidebar__menu {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 0;
+    cursor: grab;
+    flex-grow: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.primary-container .sidebar .sidebar__menu::-webkit-scrollbar {
+    display: none;
+}
+
+.primary-container .sidebar .sidebar__menu.no-scroll {
+    cursor: default;
+}
+
+.primary-container .sidebar .sidebar__menu::before,
+.primary-container .sidebar .sidebar__menu::after {
+    content: '';
+    position: fixed;
+    left: 2rem;
+    width: 8rem;
+    height: 0.4rem;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 90;
+}
+
+.primary-container .sidebar .sidebar__menu::before {
+    top: 10rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.200) 100%);
+}
+
+.primary-container .sidebar .sidebar__menu::after {
+    bottom: 10rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.200) 100%);
+}
+
+.primary-container .sidebar .sidebar__menu.has-scroll-top::before,
+.primary-container .sidebar .sidebar__menu.has-scroll-bottom::after {
+    opacity: 1;
+}
+
+.primary-container .sidebar .sidebar__menu button {
+    position: relative;
+}
+
+.primary-container .sidebar .sidebar__menu button a {
+    background-color: #fff;
+    transition: all 0.5s ease;
+}
+
+.primary-container .sidebar .sidebar__menu button a svg {
+    color: var(--blue-ideen);
+}
+
+.primary-container .sidebar .sidebar__menu button a:hover {
+    background-color: var(--green-ideen);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.primary-container .sidebar .sidebar__menu button a:hover svg {
+    color: #fff;
+    font-size: 1.6rem;
+}
+
 .primary-container .sidebar .sidebar__logout {
     display: grid;
     place-content: center;
 }
 
-.primary-container .sidebar .sidebar__logout button {
-    display: grid;
-    place-content: center;
-    width: 4.4rem;
-    height: 4.4rem;
-    border-radius: var(--border-radius-button);
+.primary-container .sidebar .sidebar__logout button a {
     background-color: #000;
+    transition: all 0.5s ease;
 }
 
-.primary-container .sidebar .sidebar__logout button svg {
+.primary-container .sidebar .sidebar__logout button a svg {
     color: #fff;
-    font-size: 2rem;
 }
 
-.primary-container .sidebar .sidebar__logout button .fa-bounce {
-    display: none;
+.primary-container .sidebar .sidebar__logout button a:hover {
+    background-color: #ff0000;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.primary-container .sidebar .sidebar__logout button:hover svg {
-    display: none;
-}
-
-.primary-container .sidebar .sidebar__logout button:hover .fa-bounce {
-    display: block;
+.primary-container .sidebar .sidebar__logout button a:hover svg {
+    color: #000;
 }
 
 .primary-container .page-content {
@@ -129,9 +241,12 @@ ul, li {
     width: calc(100% - 14rem);
     height: 8rem;
     padding: 0 2rem;
-    border-radius: var(--border-radius);
-    background-color: #fff;
-    box-shadow: var(--box-shadow);
+}
+
+.primary-container .page-content header .university-name {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .primary-container .page-content header .university-name h1 {
@@ -139,6 +254,27 @@ ul, li {
     color: var(--blue-ideen);
     font-family: "Exo 2", sans-serif;
     font-size: 4rem;
+}
+
+.primary-container .page-content header .university-name div {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    height: 4rem;
+    padding-left: 2rem;
+    border-left: 0.2rem solid #ccc;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.primary-container .page-content header .university-name div h3 {
+    font-weight: 800;
+    color: var(--green-ideen);
+}
+
+.primary-container .page-content header .university-name div p {
+    font-weight: 700;
+    color: var(--blue-ideen);
 }
 
 .primary-container .page-content header .university-user {
@@ -184,4 +320,93 @@ ul, li {
     color: var(--green-ideen);
     font-size: 1.2rem;
     letter-spacing: 0.06rem;
+}
+
+.primary-container .outstanding {
+    position: fixed;
+    top: 12rem;
+    right: 2rem;
+    width: 24%;
+    height: calc(100vh - 14rem);
+    padding: 2rem;
+}
+
+.primary-container .outstanding .profile-info {
+    width: 100%;
+    height: 44rem;
+    border-radius: 1.2rem;
+    margin: 0;
+    background-image: url(/images/background_profile.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.primary-container .outstanding .profile-info .profile-info__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 1.6rem;
+}
+
+.primary-container .outstanding .profile-info .profile-info__container > article {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 0 0.4rem 0 1.2rem;
+    border-radius: 0.8rem;
+    background-color: #d6e9dc;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+}
+
+.primary-container .outstanding .profile-info .profile-info__container > article h2 {
+    color: #000;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.primary-container .outstanding .profile-info .profile-info__container > article a {
+    display: grid;
+    place-content: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border: 2px solid var(--blue-ideen);
+    border-radius: 0.6rem;
+}
+
+.primary-container .outstanding .profile-info .profile-info__container > article a svg {
+    color: #000;
+    font-size: 1.4rem;
+}
+
+.primary-container .outstanding .profile-info .profile-info__container figure {
+    align-self: center;
+    justify-self: center;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+}
+
+.primary-container .outstanding .profile-info .profile-info__container figure img {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.primary-container .outstanding .profile-info .profile-info__container > section {
+    display: grid;
+    grid-template-columns: repeat(2, calc(50% - 1rem));
+    gap: 2rem;
+    width: 100%;
+    height: 8rem;
+    
+}
+
+.primary-container .outstanding .profile-info .profile-info__container > section article {
+    border-radius: 1.2rem;
+    background-color: #d6e9dc;
 }
